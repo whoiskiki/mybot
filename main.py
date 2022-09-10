@@ -10,7 +10,7 @@ import pyodbc
 botToken = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)  # name of the current module
 logger = telebot.logger
-logger.setLevel(logger.DEBUG)  # set the level on the debug/ allows us to see debugging messages on the heroku
+logger.setLevel(10)  # set the level on the debug/ allows us to see debugging messages on the heroku
 
 
 if __name__ == "main":  # guarantee that server will be working only with main-script (webhooks)
