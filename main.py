@@ -27,7 +27,7 @@ conn = pyodbc.connect('Driver={SQL Server};'
 cursor = conn.cursor()
 
 
-@server.route(f"/{BOT_TOKEN}", methods="POST")  # redirect messages from Flask to the server
+@server.route(f"/{BOT_TOKEN}", methods=["POST"])  # redirect messages from Flask to the server
 def redirect_message():
     json_string = request.get_data().decode("utf-8")  # data from server in json format
     update = telebot.types.Update.de_json(json_string)
