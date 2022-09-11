@@ -5,7 +5,7 @@ import os
 from config import *
 from flask import Flask, request
 
-import pyodbc
+#import pyodbc
 
 botToken = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)  # name of the current module
@@ -19,12 +19,12 @@ if __name__ == "main":  # guarantee that server will be working only with main-s
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))  # makes the server public
 
 
-conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=SEVERNAYAPOL;'
-                      'Database=GenshinTest;'
-                      'Trusted_Connection=yes;')
+#conn = pyodbc.connect('Driver={SQL Server};'
+                      #'Server=SEVERNAYAPOL;'
+                      #'Database=GenshinTest;'
+                      #'Trusted_Connection=yes;')
 
-cursor = conn.cursor()
+#cursor = conn.cursor()
 
 
 @server.route(f"/{BOT_TOKEN}", methods=["POST"])  # redirect messages from Flask to the server
@@ -78,23 +78,27 @@ def callbackButtons(call):
                 botToken.send_message(call.message.chat.id, "Ну че делаем?...", reply_markup=mark)
 
             elif call.data == 'male':
-                cursor.execute("select namech from TblCharacter where id=1")
-                res = cursor.fetchone()
+                #cursor.execute("select namech from TblCharacter where id=1")
+                #res = cursor.fetchone()
 
-                cursor.execute("select constellation from TblCharacter where id=1")
-                sec = cursor.fetchone()
-                cursor.commit()
+                #cursor.execute("select constellation from TblCharacter where id=1")
+                #sec = cursor.fetchone()
+                #cursor.commit()
+                
+                botToken.send_message(call.message.chat.id, f"Имя: Эфир \n Созвездие: Камень", reply_markup=None)
 
-                botToken.send_message(call.message.chat.id, f"Имя: {res[0]} \n Созвездие: {sec[0]}", reply_markup=None)
+                #botToken.send_message(call.message.chat.id, f"Имя: {res[0]} \n Созвездие: {sec[0]}", reply_markup=None)
             elif call.data == 'female':
-                cursor.execute("select namech from TblCharacter where id=2")
-                res = cursor.fetchone()
+                #cursor.execute("select namech from TblCharacter where id=2")
+                #res = cursor.fetchone()
 
-                cursor.execute("select constellation from TblCharacter where id=2")
-                sec = cursor.fetchone()
-                cursor.commit()
+                #cursor.execute("select constellation from TblCharacter where id=2")
+                #sec = cursor.fetchone()
+                #cursor.commit()
+                
+                botToken.send_message(call.message.chat.id, f"Имя: Пошла \n Созвездие: Нахуй", reply_markup=None)
 
-                botToken.send_message(call.message.chat.id, f"Имя: {res[0]} \n Созвездие: {sec[0]}", reply_markup=None)
+                #botToken.send_message(call.message.chat.id, f"Имя: {res[0]} \n Созвездие: {sec[0]}", reply_markup=None)
 
         botToken.edit_message_reply_markup(call.message.chat.id, message_id=call.message.id, reply_markup=None)
     except Exception as error:
@@ -102,4 +106,4 @@ def callbackButtons(call):
 
 
 botToken.polling(none_stop=True)
-conn.close()
+#conn.close()
