@@ -14,26 +14,12 @@ logger = telebot.logger
 logger.setLevel(10)  # set the level on the debug/ allows us to see debugging messages on the heroku
 
 
-if __name__ == '__main__':  # guarantee that server will be working only with main-script (webhooks)
-    botToken.remove_webhook()
-    botToken.set_webhook(url=APP_URL)
-    server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))  # makes the server public
-
-
 #conn = pyodbc.connect('Driver={SQL Server};'
                       #'Server=SEVERNAYAPOL;'
                       #'Database=GenshinTest;'
                       #'Trusted_Connection=yes;')
 
 #cursor = conn.cursor()
-
-
-@server.route(f"/{BOT_TOKEN}", methods=["POST"])  # redirect messages from Flask to the server
-def redirect_message():
-    json_string = request.get_data().decode("utf-8")  # data from server in json format
-    update = telebot.types.Update.de_json(json_string)
-    botToken.process_new_updates([update])  # deliver messages to the bot
-    return "!", 200
 
 
 @botToken.message_handler(content_types=['text'])
@@ -104,6 +90,20 @@ def callbackButtons(call):
         botToken.edit_message_reply_markup(call.message.chat.id, message_id=call.message.id, reply_markup=None)
     except Exception as error:
         print(repr(error))
+        
+       
+@server.route(f"/{BOT_TOKEN}", methods=["POST"])  # redirect messages from Flask to the server
+def redirect_message():
+    json_string = request.get_data().decode("utf-8")  # data from server in json format
+    update = telebot.types.Update.de_json(json_string)
+    botToken.process_new_updates([update])  # deliver messages to the bot
+    return "!", 200
+
+        
+if __name__ == '__main__':  # guarantee that server will be working only with main-script (webhooks)
+    botToken.remove_webhook()
+    botToken.set_webhook(url=APP_URL)
+    server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))  # makes the server public
 
 
 #botToken.polling(none_stop=True)
