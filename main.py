@@ -5,7 +5,7 @@ import os
 from config import *
 from flask import Flask, request
 
-#import pyodbc
+import pyodbc
 
 botToken = telebot.TeleBot(BOT_TOKEN)
 server = Flask(__name__)  # name of the current module
