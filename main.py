@@ -1,5 +1,6 @@
 import telebot
 import random
+from telebot import types
 import logging
 import os
 from config import *
