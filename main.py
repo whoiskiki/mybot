@@ -14,7 +14,7 @@ logger = telebot.logger
 logger.setLevel(10)  # set the level on the debug/ allows us to see debugging messages on the heroku
 
 
-if __name__ == '__main__':  # guarantee that server will be working only with main-script (webhooks)
+if __name__ == 'main':  # guarantee that server will be working only with main-script (webhooks)
     botToken.remove_webhook()
     botToken.set_webhook(url=APP_URL)
     server.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))  # makes the server public
@@ -106,5 +106,5 @@ def callbackButtons(call):
         print(repr(error))
 
 
-#botToken.polling(none_stop=True)
+botToken.polling(none_stop=True)
 #conn.close()
