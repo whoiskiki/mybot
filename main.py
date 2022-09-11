@@ -106,5 +106,5 @@ def callbackButtons(call):
         print(repr(error))
 
 
-#botToken.polling(none_stop=True)
+botToken.polling(none_stop=True)
 #conn.close()
