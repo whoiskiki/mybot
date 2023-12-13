@@ -60,7 +60,7 @@ def callbackButtons(call):
                 mark = types.InlineKeyboardMarkup(row_width=2)
                 i1 = types.InlineKeyboardButton("Aether", callback_data='male')
                 i2 = types.InlineKeyboardButton("Lumine", callback_data='female')
-                i3 = types.InlineKeyboardButton("Go back fucker", callback_data='back')
+                i3 = types.InlineKeyboardButton("Go back", callback_data='back')
                 mark.add(i1, i2, i3)
                 botToken.send_message(call.message.chat.id, "Ну че делаем?...", reply_markup=mark)
 
