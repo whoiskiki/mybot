@@ -83,7 +83,7 @@ def callbackButtons(call):
                 #sec = cursor.fetchone()
                 #cursor.commit()
                 
-                botToken.send_message(call.message.chat.id, f"Имя: Пошла \n Созвездие: Нахуй", reply_markup=None)
+                botToken.send_message(call.message.chat.id, f"Имя: Hell \n Созвездие: No", reply_markup=None)
 
                 #botToken.send_message(call.message.chat.id, f"Имя: {res[0]} \n Созвездие: {sec[0]}", reply_markup=None)
 
